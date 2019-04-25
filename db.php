@@ -24,6 +24,7 @@
 
             foreach ($val as $row){
                 foreach ($colm as $column){
+                    echo $column." ".$row[$column]."<br>";
                     $stmt->bindParam(':'.$column, $row[$column]);
                 }
                 $stmt->execute();
