@@ -11,6 +11,9 @@
         case "getNewsCommit":
                 getNewsCommit();
             break;
+        case "getLastCommit":
+                getLastCommit();
+            break;
 
 
     }
@@ -36,7 +39,24 @@
         die();
     }
 
+
+
     function getLastCommit(){
+        if (isset($_POST['chat_key'])&&isset($_POST['lastid'])){
+            global $connect_db;
+            session_start();
+            $dt=$connect_db->getRows('commits',
+                array('id',"userid",  "text_commit", "time"),
+                " WHERE chat_key='".$_POST['chat_key']."' AND id<".$_POST['lastid']." ORDER BY id DESC LIMIT 20");
+            
+            foreach ($dt as &$row) {
+                $row['time']=date ( 'H:i d.m.Y' ,$row['time'] );
+            }
+
+            echo json_encode($dt);
+
+        }
+        die();
 
 
     }

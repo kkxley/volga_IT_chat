@@ -2,8 +2,6 @@
 
     $connect_db=new DB("localhost", "chat", "root", "bnfxb");
 
-    
-
     class DB {
         private $dbh;
 
